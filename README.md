@@ -1,3 +1,77 @@
+<h3>What does this repository do?</h3>
+<p>This is a basic laravel package combined with a basic jwt-auth integration (taken from: <a href="https://www.positronx.io/laravel-jwt-authentication-tutorial-user-login-signup-api/" target="_blank>https://www.positronx.io/laravel-jwt-authentication-tutorial-user-login-signup-api"/</a>) and a simple websocket setup (taken from: <a href="https://beyondco.de/docs/laravel-websockets/getting-started/introduction" target="_blank">https://beyondco.de/docs/laravel-websockets/getting-started/introduction</a>)</p>
+
+<h3>How to make it run?</h3>
+<p>After you checked out the repo, you need to do the following steps:</p>
+<ul>
+    <li>
+        1. Run composer install in your root directory:<br/>
+        <code>composer install</code>
+    </li>
+    <li>
+        2. Create an .env file from the .env.example and adjust the database credentials to your needs
+    </li>
+    <li>
+        3. Run the following code in the root directory to create an app key:<br/>
+        <code>php artisan key:generate</code>
+    </li>
+    <li>
+        4. Run the following code in the root directory to create an jwt secret:<br/>
+        <code>php artisan jwt:secret</code>
+    </li>
+</ul>
+
+<h3>How to start the applications?</h3>
+<ul>
+    <li>
+        The backend application has to be started from the root:<br/>
+        <code>php artisan serve</code>
+    </li>
+    <li>
+        The Angular Application has to be started from the /resources/frontend/Angular directory:<br/>
+        <code>ng serve</code>
+    </li>
+    <li>
+        The websocket application has to be started from the repository root:<br/>
+        <code>php artisan websockets:serve</code>
+    </li>
+</ul>
+
+<h3>How can I test the applications?</h3>
+<ul>
+    <li>
+        The backend application can be opened at http://127.0.0.1:8000
+    </li>
+    <li>
+        The angular application can be opened at http://127.0.0.1:4200
+    </li>
+    <li>
+        The websocket application can be opened at http://127.0.0.1:6001 (but it is empty for some reason :()
+    </li>
+    <li>
+        To test the websocket do the following:
+        <ul>
+            <li>
+                - open http://127.0.0.1:8000
+            </li>
+            <li>
+                - have a look into the console tab in your browser
+            </li>
+            <li>
+                - open a terminal at root level of the repository and open tinker: <br/>
+                <code>php artisan tinker</code>
+            </li>
+            <li>
+                - inside tinker type the following and press enter:<br/>
+                <code>event(new App\Events\NewMessage("hello world"))</code>
+            <li>
+            <li>
+                - If everything works properly you should see "hello world" inside your console tab
+            </li>
+        </ul>
+    </li>
+</ul>
+
 <p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400"></a></p>
 
 <p align="center">
