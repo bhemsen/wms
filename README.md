@@ -12,11 +12,15 @@
         2. Create an .env file from the .env.example and adjust the database credentials to your needs
     </li>
     <li>
-        3. Run the following code in the root directory to create an app key:<br/>
+        3. Run the migrations:<br/>
+        <code>php artisan migrate</code>
+    </li>
+    <li>
+        4. Run the following code in the root directory to create an app key:<br/>
         <code>php artisan key:generate</code>
     </li>
     <li>
-        4. Run the following code in the root directory to create an jwt secret:<br/>
+        5. Run the following code in the root directory to create an jwt secret:<br/>
         <code>php artisan jwt:secret</code>
     </li>
 </ul>
