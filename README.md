@@ -1,5 +1,5 @@
 <h3>What does this repository do?</h3>
-<p>This is a basic laravel package combined with a basic jwt-auth integration (taken from: <a href="https://www.positronx.io/laravel-jwt-authentication-tutorial-user-login-signup-api/" target="_blank>https://www.positronx.io/laravel-jwt-authentication-tutorial-user-login-signup-api"/</a>) and a simple websocket setup (taken from: <a href="https://beyondco.de/docs/laravel-websockets/getting-started/introduction" target="_blank">https://beyondco.de/docs/laravel-websockets/getting-started/introduction</a>)</p>
+<p>This is a basic laravel package combined with a basic jwt-auth integration (taken from: <a href="https://www.positronx.io/laravel-jwt-authentication-tutorial-user-login-signup-api/" target="_blank">https://www.positronx.io/laravel-jwt-authentication-tutorial-user-login-signup-api</a>) and a simple websocket setup (taken from: <a href="https://beyondco.de/docs/laravel-websockets/getting-started/introduction" target="_blank">https://beyondco.de/docs/laravel-websockets/getting-started/introduction</a>)</p>
 
 <h3>How to make it run?</h3>
 <p>After you checked out the repo, you need to do the following steps:</p>
