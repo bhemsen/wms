@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { AuthStateService } from 'src/app/shared/auth-state.service';
 import { AuthService } from './../../shared/auth.service';
 
 // User interface
@@ -17,13 +18,15 @@ export class UserProfileComponent implements OnInit {
   UserProfile?: User;
 
   constructor(
-    public authService: AuthService
-  ) {
+    public authService: AuthService,
+  ) {}
+
+  ngOnInit() { 
     this.authService.profileUser().subscribe((data:any) => {
       this.UserProfile = data;
+    },
+    err => {
+      this.authService.signOut();
     })
   }
-
-  ngOnInit() { }
-
 }

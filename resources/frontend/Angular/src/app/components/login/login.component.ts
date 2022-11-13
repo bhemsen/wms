@@ -4,6 +4,7 @@ import { AuthService } from './../../shared/auth.service';
 import { FormBuilder, FormGroup } from "@angular/forms";
 import { TokenService } from '../../shared/token.service';
 import { AuthStateService } from '../../shared/auth-state.service';
+import { CookieService } from 'src/app/shared/cookie.service';
 
 export interface Errors {
   email: string;
@@ -25,8 +26,8 @@ export class LoginComponent implements OnInit {
     public router: Router,
     public fb: FormBuilder,
     public authService: AuthService,
-    private token: TokenService,
     private authState: AuthStateService,
+    private cookieService: CookieService,
   ) {
     this.loginForm = this.fb.group({
       email: [],
@@ -53,7 +54,8 @@ export class LoginComponent implements OnInit {
 
   // Handle response
   responseHandler(data: any){
-    this.token.handleData(data.access_token);
+    console.log(data)
+    this.cookieService.setCookie('auth_token', data.access_token);
   }
 
 }

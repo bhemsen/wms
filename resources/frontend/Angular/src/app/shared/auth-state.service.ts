@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { Router } from '@angular/router';
 import { BehaviorSubject } from 'rxjs/internal/BehaviorSubject';
 import { TokenService } from '../shared/token.service';
 
@@ -12,11 +13,11 @@ export class AuthStateService {
   userAuthState = this.userState.asObservable();
 
   constructor(
-    public token: TokenService
+    public token: TokenService,
+    public router: Router,
   ) { }
 
   setAuthState(value: boolean) {
     this.userState.next(value);
   }
-
 }

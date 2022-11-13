@@ -34,9 +34,12 @@
               "src/assets"
             ],
             "styles": [
+              "node_modules/bootstrap/dist/css/bootstrap.min.css",
               "src/styles.scss"
             ],
-            "scripts": []
+            "scripts": [
+              "node_modules/bootstrap/dist/js/bootstrap.bundle.min.js" 
+            ]
           },
           "configurations": {
             "production": {
@@ -72,6 +75,9 @@
           "defaultConfiguration": "production"
         },
         "serve": {
+          "options": {
+            "host": "dev.wms.de"
+          },
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {

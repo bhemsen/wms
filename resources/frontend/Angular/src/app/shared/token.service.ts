@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { CookieService } from './cookie.service';
 
 @Injectable({
   providedIn: 'root'
@@ -11,14 +12,10 @@ export class TokenService {
     register: 'http://127.0.0.1:8000/api/auth/register'
   };
 
-  constructor() { }
-
-  handleData(token: string){
-    localStorage.setItem('auth_token', token);
-  }
+  constructor(private cookieService: CookieService) { }
 
   getToken(){
-    return localStorage.getItem('auth_token');
+    return this.cookieService.getCookie('auth_token');
   }
 
   // Verify the token
@@ -49,7 +46,6 @@ export class TokenService {
 
   // Remove token
   removeToken(){
-    localStorage.removeItem('auth_token');
+    this.cookieService.setCookie('autch_token', '', 0, true)
   }
-
 }

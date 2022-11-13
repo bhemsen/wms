@@ -1,1 +1,11 @@
 /* You can add global styles to this file, and also import other style files */
+
+:root {
+    --header-height: 50px;
+}
+
+@media screen and (min-height: 756px) {
+    :root {
+        --header-height: 60px;
+    }
+}

@@ -7,6 +7,7 @@
     <li>
         1. Run composer install in your root directory:<br/>
         <code>composer install</code>
+        <code>composer require doctrine/dbal</code>
     </li>
     <li>
         2. Create an .env file from the .env.example and adjust the database credentials to your needs
@@ -22,6 +23,10 @@
     <li>
         5. Run the following code in the root directory to create an jwt secret:<br/>
         <code>php artisan jwt:secret</code>
+    </li>
+        <li>
+        6. Go to "/resources/frontend/Angular"<br/>
+        <code>npm install</code>
     </li>
 </ul>
 
