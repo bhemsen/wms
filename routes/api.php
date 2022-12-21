@@ -3,6 +3,10 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\ProductController;
+use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\StockController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -26,3 +30,11 @@ Route::group([
     Route::post('/refresh', [AuthController::class, 'refresh']);
     Route::get('/user-profile', [AuthController::class, 'userProfile']);
 });
+
+Route::resource('products', ProductController::class);
+Route::get('products/search/{name}', [ProductController::class, 'search']);
+
+Route::resource('categories', CategoryController::class);
+Route::resource('stock', StockController::class);
+Route::delete('/stock/{product_id}/{amount}', [StockController::class, 'destroy']);
+

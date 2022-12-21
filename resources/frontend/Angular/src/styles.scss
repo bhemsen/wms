@@ -1,11 +1,122 @@
 /* You can add global styles to this file, and also import other style files */
+@import './node_modules/@fortawesome/fontawesome-free/scss/fontawesome';
+@import './node_modules/@fortawesome/fontawesome-free/scss/regular';
+@import './node_modules/@fortawesome/fontawesome-free/scss/solid';
+
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap');
 
 :root {
-    --header-height: 50px;
+    --header-height: 5.4rem;
+    --component-spacer: 5rem;
+    --container-padding: 4.5rem;
+
+
+    // colors 
+    --dark-green: #90A35D;
+    --light-green: #F7FAEF;
+
+    --darker-green: #2D3E00;
+
+    --light-grey: #707070;
+    --grey: #505050;
+
+    --orange: #EFC17C;
+
+    --box-shadow: #73836E29;
+
+
+    // font-sizes
+    --font-size-body: 1.8rem;
+    --font-size-h1: 3rem;
+    --font-size-h3: 2.5rem;
+    --font-size-sort: 1.2rem;
+    --font-size-amount: 2.2rem;
+
 }
 
 @media screen and (min-height: 756px) {
     :root {
-        --header-height: 60px;
+        --header-height: 6rem;
+        --component-spacer: 5rem;
+        --font-size-body: 2.1rem;
+        --font-size-h1: 3.5rem;
+        --font-size-h3: 2.8rem;
+        --font-size-sort: 1.4rem;
+        --font-size-amount: 2.5rem;
     }
+}
+
+* {
+    box-sizing: border-box;
+}
+
+html {
+    height: 100%;
+    display: flex;
+    flex-grow: 1;
+    font-size: 10px;
+}
+
+body {
+    font-family: 'Roboto', sans-serif;
+    background-color: var(--light-green);
+    font-size: var(--font-size-body);
+    width: 100%;
+}
+app-root {
+    height: 100%;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+app-footer {
+    display: flex;
+    width: 100%;
+    align-items: end;
+}
+
+.custom-btn {
+    border-radius:  0.375rem;
+    padding: 1px 6px;
+}
+
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type=number] {
+  -moz-appearance: textfield;
+}
+
+
+section {
+    margin-bottom: var(--component-spacer);
+}
+
+.form-group {
+    margin-bottom: .8rem;
+}
+
+.ng-touched {
+    &.ng-invalid {
+        border-color: red;
+    }
+}
+
+// headlines 
+
+h1 {
+    font-size: var(--font-size-h1);
+    font-weight: 100;
+    color: var(--darker-green);
+}
+
+h3 {
+    font-size: var(--font-size-h3);
+    font-weight: 100;
+    color: var(--darker-green);
 }

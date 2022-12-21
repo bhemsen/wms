@@ -1,0 +1,5 @@
+<form [formGroup]="amountForm">
+    <button (click)="lowerAmount()" class="btn"><i class="fa-solid fa-minus"></i></button>
+    <input type="number" value="{{product.count}}" formControlName="amount">
+    <button (click)="higherAmount()" class="btn"><i class="fa-solid fa-plus"></i></button>
+  </form>

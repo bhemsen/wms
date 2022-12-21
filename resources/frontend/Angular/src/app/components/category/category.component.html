@@ -1,0 +1,11 @@
+<h2>Neue Kategorie hinzufügen</h2>
+
+<form [formGroup]="addCategoryForm" (submit)="submitForm()">
+    <div class="form-group">
+        <label for="name"></label>
+        <input class="form-control" type="text" name="name" id="name" formControlName="name">
+    </div>
+    <div class="form-group">
+        <input type="submit" class="btn btn-primary">
+    </div>
+</form>

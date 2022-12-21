@@ -7,7 +7,7 @@ export class CookieService {
 
   constructor() { }
 
-  setCookie(cname: string, cvalue: string, ttl: number = 60 * 60 * 1000, reset: boolean = false) {
+  setCookie(cname: string, cvalue: string, ttl: number = 365 * 24 * 60 * 60 * 1000, reset: boolean = false) {
     const d = new Date();
     d.setTime(d.getTime() + ttl);
     let expires;

@@ -1,17 +1,23 @@
+<!-- <div class="d-flex flex-column flex-md-row align-items-center p-2 px-md-4 mb-3 bg-white border-bottom shadow-sm fixed-top justify-content-md-between">
+  <h5 class="my-0 mr-md-auto font-weight-normal">WMS</h5>
+  <nav class="my-2 my-md-0 mr-md-3">
+    <a class="p-2 text-dark" routerLink="/profile" *ngIf="isSignedIn">User Profile</a>
+    <a class="p-2 text-dark" *ngIf="!isSignedIn" routerLink="/login">Log in</a>
+    <a class="p-2 text-dark" *ngIf="!isSignedIn" routerLink="/register">Register</a>
+  </nav>
+  <button class="btn btn-link" (click)="signOut()" *ngIf="isSignedIn">Log out</button>
+</div> -->
+<!-- <app-header [isSignedIn]="isSignedIn"></app-header> -->
 <div class="container app-wrapper">
   <div class="row">
+    <div *ngIf="isSignedIn" class="col-12">
+      <h1 class="text-center mt-4 mb-5">Vorratsliste</h1>
+    </div>
     <div class="col-12">
-      <div class="d-flex flex-column flex-md-row align-items-center p-2 px-md-4 mb-3 bg-white border-bottom shadow-sm fixed-top justify-content-md-between">
-        <h5 class="my-0 mr-md-auto font-weight-normal">WMS</h5>
-        <nav class="my-2 my-md-0 mr-md-3">
-          <a class="p-2 text-dark" routerLink="/profile" *ngIf="isSignedIn">User Profile</a>
-          <a class="p-2 text-dark" *ngIf="!isSignedIn" routerLink="/login">Log in</a>
-          <a class="p-2 text-dark" *ngIf="!isSignedIn" routerLink="/register">Register</a>
-        </nav>
-        <button class="btn btn-link" (click)="signOut()" *ngIf="isSignedIn">Log out</button>
-      </div>
-
       <router-outlet></router-outlet>
     </div>
   </div>
 </div>
+
+
+<app-footer></app-footer>

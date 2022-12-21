@@ -47,7 +47,7 @@ export class LoginComponent implements OnInit {
       },() => {
         this.authState.setAuthState(true);
         this.loginForm.reset();
-        this.router.navigate(['profile']);
+        this.router.navigate(['dashboard']);
       }
     );
   }

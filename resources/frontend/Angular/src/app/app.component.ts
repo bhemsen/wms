@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { TokenService } from './shared/token.service';
 import { AuthStateService } from './shared/auth-state.service';
@@ -12,10 +12,11 @@ import { AuthService } from './shared/auth.service';
 
 export class AppComponent implements OnInit {
   isSignedIn?: boolean;
+  UserProfile:any;
 
   constructor(
-    private authService: AuthService,
     private authStateService: AuthStateService,
+    public authService: AuthService,
     public token: TokenService,
   ) {
   }
@@ -24,9 +25,5 @@ export class AppComponent implements OnInit {
     this.authStateService.userAuthState.subscribe(val => {
       this.isSignedIn = val;
     });
-  }
-
-  signOut(){
-    this.authService.signOut()
   }
 }

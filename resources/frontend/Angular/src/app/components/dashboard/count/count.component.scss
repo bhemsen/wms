@@ -1,0 +1,22 @@
+form {
+    max-width: 190px;
+}
+
+input {
+    border: none;
+    width: 5ch;
+    text-align: center;
+}
+.btn {
+    background-color: var(--orange);
+    box-shadow: 0px 1px 10px var(--box-shadow);
+    border-radius: 18px;
+    color: #fff;
+    font-size: var(--font-size-body);
+    padding-inline: 1.3rem;
+
+    &:active {
+        background-color: var(--orange);
+        color: #fff;
+    }
+}
