@@ -1,0 +1,13 @@
+<h1 class="text-center mt-4 mb-5">min lille inköpslista</h1>
+<div class="content">
+    <app-search [isShoppingList]="true" (searchTerm)="search($event)" (reset)="search('')"></app-search>
+
+    <app-accordion (hasChanges)="hasChanges$.next($event)"></app-accordion>
+
+    <ul class="shopping-list">
+        <li #listItem class="shopping-list__item" *ngFor="let item of (this.displayList || this.shoppingList); let i = index;" id="shopping-list__item--{{ i }}" (mouseup)="clearTimer()">
+            <span class="position-relative shopping-list__item__text">{{ item.name }}</span>
+            <app-count [product]="item" [isShoppingList]="true" (hasChanges)="hasChanges$.next($event)"></app-count>
+        </li>
+    </ul>
+</div>

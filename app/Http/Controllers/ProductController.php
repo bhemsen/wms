@@ -39,7 +39,7 @@ class ProductController extends Controller
     {
         $validator = Validator::make($request -> all(),[
             "name" => "required|string|max:255",
-            "category_id" => "required|integer|min:1"
+            "category_id" => "required|integer|min:1",
         ]);
         if($validator -> fails()){
             return response()->json($validator->errors(), 422);
@@ -60,7 +60,7 @@ class ProductController extends Controller
      */
     public function show($id)
     {
-        return Category::find($id);
+        return Product::find($id);
     }
 
     /**
@@ -86,7 +86,10 @@ class ProductController extends Controller
      */
     public function search($name)
     {
-        return Product::where('name', 'like', '%'.$name.'%')->get();
+        return response()->json(DB::table('products')->where('products.name', 'like', '%'.$name.'%')
+            ->leftJoin('categories as c','c.id', '=', 'products.category_id')
+            ->selectRaw('products.id as id, products.name as name, c.name as category_name, c.id as category_id')
+            ->get());
     }
 
     /**
@@ -98,5 +101,35 @@ class ProductController extends Controller
     public function destroy($id)
     {
         return Product::destroy($id);
+    }
+
+    public function indexByUser($user_id)
+    {
+        return response()->json(
+            DB::table('products')
+                ->leftJoin('categories as c','c.id', '=', 'products.category_id')
+                ->join('stocks as s', function ($join) use($user_id) {
+                    $join->on('s.product_id', '=', 'products.id')
+                         ->where('s.user_id', '=', $user_id);
+                })
+                ->selectRaw('products.id as id, products.name as name, c.name as category_name, c.id as category_id, count(s.product_id) as count')
+                ->groupBy('products.id')
+                ->orderBy('products.name', 'asc')
+                ->get());
+    }
+
+    public function shoppingListByUser($user_id)
+    {
+        return response()->json(
+            DB::table('products')
+                ->leftJoin('categories as c','c.id', '=', 'products.category_id')
+                ->join('shopping_lists as s', function ($join) use($user_id) {
+                    $join->on('s.product_id', '=', 'products.id')
+                         ->where('s.user_id', '=', $user_id);
+                })
+                ->selectRaw('products.id as id, products.name as name, c.name as category_name, c.id as category_id, count(s.product_id) as count')
+                ->groupBy('products.id')
+                ->orderBy('products.name', 'asc')
+                ->get());
     }
 }

@@ -42,7 +42,8 @@ class StockController extends Controller
         for ($i = 0; $i < $count; $i++) {
             $temp = [
                 "product_id" => $request->input('product_id'),
-                "mhd"=> ''
+                "mhd"=> '',
+                "user_id" => $request->input('user_id')
             ];
             array_push($arr, $temp);
         }
@@ -50,6 +51,8 @@ class StockController extends Controller
         return response()->json([
             "message"=>"added to stock",
         ], 201);
+
+        // return response()->json($request);
     }
 
     /**
@@ -93,20 +96,18 @@ class StockController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id, $amount)
+    public function destroy($id, $amount, $userId)
     {
-        // $arr = array();
-
-        // array_push($arr, Stock::where('product_id', '=',$id)->limit($amount));
-        // array_push($arr, $id);
-        // array_push($arr, $amount);
+        if ( auth()->user()->id != $userId) {
+            return response()->json(['error' => 'Unauthorized'], 401);
+        }
         return response()->json(
-            Stock::where('product_id',$id)
+            Stock::where([
+                ['product_id',$id],
+                ['user_id',$userId],
+                ])
                 ->limit($amount)
                 ->delete()
-       
-            // $arr
-
         );
     }
 }

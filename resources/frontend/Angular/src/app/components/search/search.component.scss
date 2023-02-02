@@ -1,0 +1,28 @@
+.search {
+    border: 1px solid var(--color-control-inputs);
+
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    align-items: center;
+    border-radius: 2.5rem;
+    background-color: #fff;
+    box-shadow: 0px .1rem 1rem var(--box-shadow);
+    padding: 1.4rem 2.4rem;
+    margin-bottom: 1rem;
+
+    .form-group {
+        margin-bottom: 0;
+    }
+    input {
+        &:focus {
+            box-shadow: none;
+        }
+        padding:0;
+        height: 100%;
+        font-size: var(--font-size-body)!important;
+        line-height: 1;
+        color: var(--color-control-inputs);
+        border: none;
+    }
+}

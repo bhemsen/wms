@@ -17,7 +17,10 @@ class CreateStockTable extends Migration
             $table->id();
             $table->unsignedBigInteger('product_id');
             $table->index('product_id');
-            $table->foreign('product_id')->references('id')->on('products')->onDelete('cascade');
+            $table->unsignedBigInteger('user_id');
+            $table->index('user_id');
+            $table->foreign('product_id')->references('id')->on('products')->onDelete('cascade');            
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->string('mhd');
             $table->timestamps();
         });
@@ -30,6 +33,6 @@ class CreateStockTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('stock');
+        Schema::dropIfExists('stocks');
     }
 }

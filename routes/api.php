@@ -6,6 +6,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\StockController;
+use App\Http\Controllers\ShoppingListController;
 
 
 /*
@@ -33,8 +34,16 @@ Route::group([
 
 Route::resource('products', ProductController::class);
 Route::get('products/search/{name}', [ProductController::class, 'search']);
+Route::get('user/products/{user_id}/', [ProductController::class, 'indexByUser']);
+Route::get('user/shoppinglist/products/{user_id}/', [ProductController::class, 'shoppingListByUser']);
+
 
 Route::resource('categories', CategoryController::class);
 Route::resource('stock', StockController::class);
-Route::delete('/stock/{product_id}/{amount}', [StockController::class, 'destroy']);
+Route::delete('/stock/{product_id}/{amount}/{userId}', [StockController::class, 'destroy']);
 
+Route::resource('shoppinglist', ShoppingListController::class);
+Route::delete('shoppinglist/{product_id}/{amount}/{userId}', [ShoppingListController::class, 'destroy']);
+
+
+Route::get('session', [ShoppingListController::class, 'index']);

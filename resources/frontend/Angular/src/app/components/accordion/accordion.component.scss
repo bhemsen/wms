@@ -1,0 +1,72 @@
+:host {
+    background: transparent;
+}
+
+#accordion {
+    box-shadow: 0px 0.9px 0.12px -0.12px var(--darker-blue);
+    padding-bottom: 2.5rem;
+    margin-bottom: 2.5rem;
+    
+    .form-group {
+        margin-bottom: 1.5rem;
+    }
+    
+    .last-input {
+        margin-bottom: 2.5rem;
+    }
+    
+    .form-control {
+        height: 35px;
+        border: 1px solid;
+        border-color: var(--light-grey)!important;
+        font-size: var(--font-size-body)!important;
+        color: var(--grey);
+    
+    }
+    .accordion-item {
+        margin-bottom: 1rem;
+        border-radius: 25px;
+        &:last-of-type {
+            margin-bottom: 0;
+        }
+    }
+    .accordion-button {
+        font-size: var(--font-size-body);
+        color: #fff;
+        background-color: var(--color-control-inputs);
+        border-top-left-radius: 25px!important;
+        border-top-right-radius: 25px!important;
+        border-bottom-left-radius: 0;
+        border-bottom-right-radius: 0;
+        padding: 14px 24px;
+
+        &:after {
+            content: unset;
+        }
+
+        // &:after {
+        //     content: "\f068";
+        //     background: none;
+        //     font-family: 'Font Awesome 6 Free';  
+        //     font-weight: 900;
+        //     display: flex;
+        //     align-items: center;
+        //     justify-content: center;
+        //     transform: none;
+        // }
+        &.collapsed {
+            border-radius: 25px!important;
+            // &::after {
+            //     content: "\2b"; 
+            // }
+        }
+
+    }
+    .accordion-body {
+        padding: 2.6rem 2.4rem;
+        border-bottom-left-radius: 2.5rem;
+        border-bottom-right-radius: 2.5rem;
+        box-shadow: 0px .1rem 1rem var(--box-shadow);
+    }
+
+}

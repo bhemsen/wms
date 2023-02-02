@@ -5,6 +5,7 @@ import { DashboardComponent } from './components/dashboard/dashboard.component';
 import {LoginComponent} from "./components/login/login.component";
 import { ProductComponent } from './components/product/product.component';
 import {RegisterComponent} from "./components/register/register.component";
+import { ShoppingListComponent } from './components/shopping-list/shopping-list.component';
 import {UserProfileComponent} from "./components/user-profile/user-profile.component";
 
 const routes: Routes = [
@@ -17,7 +18,8 @@ const routes: Routes = [
     {path: 'category', component: CategoryComponent},
     {path: 'product', component: ProductComponent},
   ]},
-  {path: '**', redirectTo:'/'},
+  {path: 'shoppinglist', component: ShoppingListComponent},
+
 ];
 
 @NgModule({

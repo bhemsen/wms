@@ -32,7 +32,7 @@ class CategoryController extends Controller
         if($validator -> fails()){
             return response()->json($validator->errors(), 422);
         } else {
-            $q = Category::create($validator->validated());
+            $q = Category::firstOrCreate($validator->validated());
             return response()->json([
                 "message"=>"Category created",
                 "category" => $q

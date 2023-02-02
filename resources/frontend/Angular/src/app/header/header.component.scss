@@ -1,5 +1,16 @@
+:host {
+    width: 100%;
+    height: 6rem;
+}
 header {
+    padding: var(--font-size-body);
+    line-height: 1;
     .btn {
         font-size: var(--font-size-body);
+    }
+
+    .svg-icon {
+        width: 2.4rem;
+        height: 2.4rem;
     }
 }

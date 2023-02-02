@@ -1,0 +1,85 @@
+.content {
+    padding: 0 2rem;
+    ::ng-deep {
+        app-search {
+            input {
+                &::placeholder {
+                    color: var(--dark-blue) !important;
+                }
+                --color-control-inputs: var(--dark-blue);
+                background-color: transparent;
+                color: var(--dark-blue) !important;
+            }
+        }
+        app-accordion {
+            #accordion {
+                box-shadow: none;
+                .accordion-button {
+                    background-color: transparent;
+                    border: 1px solid var(--dark-blue);
+                    color: var(--dark-blue);
+                    .icon-add {
+                        fill: var(--dark-blue);
+                    }
+                }
+            }
+        }
+    }
+}
+.shopping-list {
+    list-style-type: none;
+    padding: 0;
+    &__item {
+        padding: 1rem 0;
+        border-bottom: 1px solid var(--shopping-list-border);
+        color: var(--darker-blue);
+        font-weight: 900;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+
+        &__text{
+            cursor: pointer;
+            &:after {
+                content: "";
+                position: absolute;
+                top: 50%;
+                left: 0;
+                transform: translateY(-50%);
+                width: 0;
+                transition: all .3s ease-in;
+            }
+        }
+
+        ::ng-deep {
+            app-count {
+                .btn {
+                    padding-block: 0;
+                    background-color: unset;
+                    border: unset;
+                    box-shadow: none;
+                    color: var(--dark-blue);
+                }
+                input {
+                    background-color: transparent;
+                    color: var(--dark-blue);
+                    font-weight: 900;
+                }
+            }
+        }
+    }
+}
+
+
+
+.bought {
+    &:after {
+        width: 100%;
+        border: 1px solid black;
+    }
+    span:after {
+        width: 100%;
+        border: 1px solid black;
+    }
+}
+

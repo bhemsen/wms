@@ -7,12 +7,9 @@
   </nav>
   <button class="btn btn-link" (click)="signOut()" *ngIf="isSignedIn">Log out</button>
 </div> -->
-<!-- <app-header [isSignedIn]="isSignedIn"></app-header> -->
+<app-header [isSignedIn]="isSignedIn"></app-header>
 <div class="container app-wrapper">
   <div class="row">
-    <div *ngIf="isSignedIn" class="col-12">
-      <h1 class="text-center mt-4 mb-5">Vorratsliste</h1>
-    </div>
     <div class="col-12">
       <router-outlet></router-outlet>
     </div>

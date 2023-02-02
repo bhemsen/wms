@@ -1,0 +1,12 @@
+<div class="entry search">
+    <form class="w-100" [formGroup]="searchForm">
+      <div class="form-group d-flex align-items-center">
+        <input class="form-control" type="text" formControlName="search" placeholder="{{ this.isShoppingList? 'Liste durchsuchen' : 'Suchen'}}">
+        <button class="btn reset-btn" type="reset">
+          <svg class="svg-icon" focusable="false">
+            <use xlink:href="assets/icons/search.svg#Ebene_1"></use>
+          </svg>
+        </button>
+      </div>
+    </form>
+  </div>

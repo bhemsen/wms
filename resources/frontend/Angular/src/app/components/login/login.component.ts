@@ -55,6 +55,7 @@ export class LoginComponent implements OnInit {
   // Handle response
   responseHandler(data: any){
     console.log(data)
+    this.cookieService.setCookie('user_id', data.user.id);
     this.cookieService.setCookie('auth_token', data.access_token);
   }
 

@@ -10,10 +10,12 @@
 .form-control {
     height: 35px;
     border: 1px solid;
-    border-color: var(--light-grey)!important;
-    font-size: var(--font-size-body)!important;
+    border-color: var(--light-grey);
+    font-size: var(--font-size-body);
     color: var(--grey);
-
+    display: flex;
+    align-content: center;
+    flex-wrap: wrap;
 }
 
 .btn {
@@ -22,6 +24,51 @@
     border-radius: 25px;
     font-weight: bold;
     box-shadow: 0px 1px 10px var(--box-shadow);
-    background-color: var(--orange);
-    border-color: var(--orange);
+    background-color: var(--rose);
+    border-color: var(--rose);
+}
+
+.search {
+    &-wrapper {
+        position: relative;
+    }
+    &__results {
+        position: absolute;
+        background: white;
+        left: 0;
+        right: 0;
+        padding: 0.375rem 0.75rem;
+        border-top: unset;
+        border-left: 1px solid black;
+        border-right: 1px solid black;
+        border-bottom: 1px solid black;
+        border-radius: .4rem;
+        
+        &__link {
+            text-decoration: none;
+            color: var(--light-grey);
+        }
+    }
+}
+
+.reset-btn {
+    border: none;
+    background: none;
+    box-shadow: none;
+    padding: 0;
+    position: absolute;
+    right: .75rem;
+    top: 50%;
+    transform: translateY(-50%);
+    .svg-icon {
+        fill: var(--light-grey);;
+    }
+}
+   
+.rotate-45 {
+    transform: rotate(45deg);
+}
+
+.product-category {
+    font-size: smaller;
 }

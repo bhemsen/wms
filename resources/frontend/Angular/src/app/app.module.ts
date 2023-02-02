@@ -15,6 +15,11 @@ import { CategoryComponent } from './components/category/category.component';
 import { FooterComponent } from './footer/footer.component';
 import { HeaderComponent } from './header/header.component';
 import { CountComponent } from './components/dashboard/count/count.component';
+import { FiltersComponent } from './components/filters/filters.component';
+import { FilterComponent } from './components/filters/filter/filter.component';
+import { ShoppingListComponent } from './components/shopping-list/shopping-list.component';
+import { AccordionComponent } from './components/accordion/accordion.component';
+import { SearchComponent } from './components/search/search.component';
 
 @NgModule({
   declarations: [
@@ -27,7 +32,12 @@ import { CountComponent } from './components/dashboard/count/count.component';
     CategoryComponent,
     FooterComponent,
     HeaderComponent,
-    CountComponent
+    CountComponent,
+    FiltersComponent,
+    FilterComponent,
+    ShoppingListComponent,
+    AccordionComponent,
+    SearchComponent
   ],
   imports: [
     BrowserModule,

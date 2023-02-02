@@ -1,9 +1,10 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Subject } from 'rxjs';
-import { debounceTime, filter, takeUntil } from 'rxjs/operators';
+import { takeUntil } from 'rxjs/operators';
 import { ProductService } from 'src/app/product.service';
+import { DatabaseService } from 'src/app/shared/database.service';
 import { Product } from 'src/app/shared/interfaces/product';
+
 
 @Component({
   selector: 'app-dashboard',
@@ -16,42 +17,31 @@ export class DashboardComponent implements OnInit, OnDestroy {
   displayList?: Product[];
   asc:boolean = true;
 
-  searchForm: FormGroup = new FormGroup({
-    search: new FormControl('', Validators.required)
-  })
-
-  constructor(private productService: ProductService) { }
+  constructor(private productService: ProductService, private db: DatabaseService) { }
 
   ngOnInit(): void {
+    console.log('init')
+
+    this.db.test().subscribe(e => {
+      console.log(e)
+    })
+
     this.productService.getProducts$().pipe(takeUntil(this.notifier$)).subscribe(products => {
       this.products = this.asc? products.sort() : products.reverse();
     })
 
-    this.searchForm.valueChanges
-    .pipe(
-      takeUntil(this.notifier$),
-      debounceTime(500), 
-      filter(e => {
-        if(e?.search?.length >= 2) {
-          return e
-        }
-        this.displayList = undefined;
-      })
-      )
-      .subscribe(val => {
-        console.log(val, val.search)
-        this.displayList = this.products?.filter(product => product.name.toLowerCase().includes(val.search.toLowerCase()))
-    })
+
   }
 
   ngOnDestroy(): void {
+      console.log('destroy')
+
     this.notifier$.next(null);
     this.notifier$.complete();
   }
 
   deleteProduct(product_id: number) {
     this.productService.deleteProduct(product_id).pipe(takeUntil(this.notifier$)).subscribe(e=> {
-      console.log(e)
       if(e)
         this.productService.setHasChanges(null);
     })
@@ -60,5 +50,22 @@ export class DashboardComponent implements OnInit, OnDestroy {
   sort() {
     this.asc = !this.asc;
     this.products?.reverse()
+  }
+
+  filter(activeFilter: string) {
+    if(activeFilter === 'all') {
+      this.displayList = undefined;
+      return
+    }
+    this.displayList = this.products?.filter(product => product.category_name === activeFilter)
+  }
+
+  search(searchTerm: string): void {
+    console.log(searchTerm)
+    if(searchTerm.length < 2) {
+      this.displayList = undefined;
+      return
+    }
+    this.displayList = this.products?.filter(product => product.name.toLowerCase().includes(searchTerm))
   }
 }

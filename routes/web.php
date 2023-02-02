@@ -15,4 +15,6 @@ use App\Http\Controllers\AngularController;
 |
 */
 
+Route::any('', [AngularController::class, 'index']);
+      
 Route::any('/{any}', [AngularController::class, 'index'])->where('any', '^(?!api).*$');

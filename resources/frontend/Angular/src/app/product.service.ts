@@ -20,7 +20,6 @@ export class ProductService implements OnDestroy {
     this.hasChanges$.pipe(
       takeUntil(this.notifier$),
       switchMap(()=> {
-        console.log('asdsad')
         return this.dbService.getAllProducts()
       })
     ).subscribe((products)=> {
@@ -39,8 +38,14 @@ export class ProductService implements OnDestroy {
     if(newCount > product.count) {
       return this.dbService.setStockLevel(product.id.toString(), newCount - product.count)
     }
-    console.log('delete', newCount)
     return this.dbService.deleteProdut(product, product.count - newCount)
+  }
+
+  updateProductCountShoppingList(product:Product, newCount: number) {
+    if(newCount > product.count) {
+      return this.dbService.setShoppinglistLevel(product.id.toString(), newCount - product.count)
+    }
+    return this.dbService.deleteProdutShoppinglist(product, product.count - newCount)
   }
 
   deleteProduct(product_id:number): Observable<any> {

@@ -1,0 +1,16 @@
+.filter {
+    text-align: center;
+    color: var(--orange);
+    padding-block: .9rem;
+    font-size: var(--font-size-body);
+    border-radius: 25px;
+    font-weight: bold;
+    box-shadow: 0px 1px 10px var(--box-shadow);
+    margin-bottom: .5rem;
+    border: 1px solid var(--orange);
+
+    &.active {
+        background-color: var(--orange);
+        color: #fff;
+    }
+}

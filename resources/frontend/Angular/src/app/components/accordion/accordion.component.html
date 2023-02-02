@@ -1,0 +1,19 @@
+<section id="accordion">
+    <div class="accordion" id="accordionExample">
+      <div class="accordion-item">
+        <h2 class="accordion-header" id="headingOne">
+          <button class="accordion-button collapsed d-flex justify-content-between" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
+            Artikel hinzufügen
+            <svg class="svg-icon fill-white icon-add" focusable="false">
+              <use xlink:href="assets/icons/add-medium.svg#Ebene_1"></use>
+            </svg>
+          </button>
+        </h2>
+        <div id="collapseOne" class="accordion-collapse collapse" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+          <div class="accordion-body">
+            <app-product (hasChanges)="hasChanges.emit($event)"></app-product>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>

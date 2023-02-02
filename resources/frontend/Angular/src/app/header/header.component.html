@@ -1,14 +1,8 @@
-<header>
+<!-- <header>
     <nav class="navbar fixed-top navbar-expand-lg navbar-light bg-light d-flex flex-nowrap">
         <div class="container-fluid">
-          <!-- <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo03" aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-          </button> -->
           <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                <!-- <li class="nav-item">
-                    <a class="p-2 text-dark" routerLink="/profile" *ngIf="isSignedIn">User Profile</a>
-                </li> -->
                 <li class="nav-item">
                     <a class="p-2 text-dark" *ngIf="!isSignedIn" routerLink="/login">Log in</a>
                 </li>
@@ -20,5 +14,32 @@
           <button class="btn btn-link ms-auto" (click)="signOut()" *ngIf="isSignedIn">Log out</button>
         </div>
       </nav>
-</header>
+</header> -->
 
+<header class="d-flex w-100 justify-content-between container">
+  <ng-container *ngIf="!isList; else list">
+    <a [routerLink]="['dashboard']">
+      <svg class="svg-icon" focusable="false">
+        <use xlink:href="assets/icons/home-active.svg#Ebene_1"></use>
+      </svg>
+    </a>
+    <a [routerLink]="['shoppinglist']">
+      <svg class="svg-icon" focusable="false">
+        <use xlink:href="assets/icons/shoppinglist-inactive.svg#Ebene_1"></use>
+      </svg>
+    </a>
+  </ng-container>
+
+  <ng-template #list>
+    <a [routerLink]="['dashboard']">
+      <svg class="svg-icon" focusable="false">
+        <use xlink:href="assets/icons/home-inactive.svg#Ebene_1"></use>
+      </svg>
+    </a>
+    <a [routerLink]="['shoppinglist']">
+      <svg class="svg-icon" focusable="false">
+        <use xlink:href="assets/icons/shoppinglist-active.svg#Ebene_1"></use>
+      </svg>
+    </a>
+  </ng-template>
+</header>

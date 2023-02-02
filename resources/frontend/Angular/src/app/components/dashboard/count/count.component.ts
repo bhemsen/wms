@@ -1,4 +1,4 @@
-import { Component, Input, OnDestroy, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Subject } from 'rxjs';
 import { debounceTime, distinctUntilChanged, switchMap, takeUntil } from 'rxjs/operators';
@@ -12,6 +12,9 @@ import { Product } from 'src/app/shared/interfaces/product';
 })
 export class CountComponent implements OnInit, OnDestroy {
   @Input() product!: Product;
+  @Input() isShoppingList: boolean = false;
+
+  @Output() hasChanges: EventEmitter<boolean> = new EventEmitter()
 
   notifier$ = new Subject();
   amountForm!: FormGroup;
@@ -32,16 +35,17 @@ export class CountComponent implements OnInit, OnDestroy {
       debounceTime(500),
       switchMap(amount => {
         if(this.amountForm.invalid){
-          console.log('invalid')
           this.amountForm.markAllAsTouched();
           throw new Error('Die Eingabe ist ungültig')
         }
-        console.log(amount.amount)
-
+        if(this.isShoppingList) {
+        return this.productService.updateProductCountShoppingList(this.product, amount.amount)
+        }
         return this.productService.updateProductCount(this.product, amount.amount)
       })
       ).subscribe(e => {
         console.log(e)
+          this.hasChanges.emit(true)
           this.productService.setHasChanges(null);
       })
   }

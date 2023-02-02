@@ -23,12 +23,12 @@ export class CategoryComponent implements OnInit, OnDestroy {
   submitForm(): void {
     if(this.addCategoryForm.invalid){
       this.addCategoryForm.markAllAsTouched();
+      console.log('err')
       return
     }
     this.dbService.addCategory(this.addCategoryForm.get('name')?.value).pipe(takeUntil(
       this.notifier$
     )).subscribe(res => {
-      console.log(res)
       this.addCategoryForm.reset();
     })
   }
