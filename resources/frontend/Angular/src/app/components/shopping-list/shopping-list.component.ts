@@ -22,8 +22,8 @@ export class ShoppingListComponent implements OnInit, AfterViewInit, OnDestroy {
   private mouseDown$ = fromEvent(document, 'mousedown');
   private mouseUp$ = fromEvent(document, 'mouseup');
 
-  constructor(private dbService: DatabaseService) { 
-}
+  constructor(private dbService: DatabaseService, private productService: ProductService) {
+  }
 
   @ViewChildren('listItem') listItems?: QueryList<ElementRef>;
 
@@ -36,25 +36,27 @@ export class ShoppingListComponent implements OnInit, AfterViewInit, OnDestroy {
     this.mouseDown$.pipe(
       switchMap(() => timer(700)),
       takeUntil(this.clear$),
-      switchMap(()=> {
+      switchMap(() => {
         console.log('.7s seconds have passed!');
         item.classList.add('bought')
         console.log(product);
-        return this.dbService.addProduct(product.name, product.category_id.toString())
+        return this.dbService.addProduct(product.name, product.category_id?.toString())
       }),
-      switchMap((val: ProductCreationResponse)=> {
+      switchMap((val: ProductCreationResponse) => {
         this.dbService.deleteProdutShoppinglist(product, product.count).subscribe();
         return this.dbService.setStockLevel(val.product.id.toString(), product.count);
 
       })
     ).subscribe((res) => {
       console.log(res);
-      setTimeout(()=> {
+      setTimeout(() => {
         this.hasChanges$.next(true);
+        this.productService.setHasChanges(true)
       }, 300)
     });
   }
 
+  @HostListener('mouseup', ['$event'])
   clearTimer() {
     this.clear$.next(null)
   }
@@ -68,10 +70,10 @@ export class ShoppingListComponent implements OnInit, AfterViewInit, OnDestroy {
 
     this.hasChanges$.pipe(
       takeUntil(this.notifier$),
-      switchMap(()=> {
+      switchMap(() => {
         return this.dbService.getShoppingList()
       })
-    ).subscribe((products)=> {
+    ).subscribe((products) => {
       this.shoppingList$.next(products);
     })
 
@@ -81,8 +83,8 @@ export class ShoppingListComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   ngAfterViewInit(): void {
-    this.listItems?.changes.pipe(takeUntil(this.notifier$)).subscribe(e=> {
-      e.forEach((element:any) => {
+    this.listItems?.changes.pipe(takeUntil(this.notifier$)).subscribe(e => {
+      e.forEach((element: any) => {
         console.log(element)
       });
     })
@@ -97,7 +99,7 @@ export class ShoppingListComponent implements OnInit, AfterViewInit, OnDestroy {
 
   search(searchTerm: string): void {
     console.log(searchTerm)
-    if(searchTerm.length < 2) {
+    if (searchTerm.length < 2) {
       this.displayList = undefined;
       return
     }

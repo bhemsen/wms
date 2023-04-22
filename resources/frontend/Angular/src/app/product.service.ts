@@ -9,7 +9,7 @@ import { Product } from './shared/interfaces/product';
 })
 export class ProductService implements OnDestroy {
   notifier$ = new Subject();
-  products$: Subject<Product[]> = new Subject();
+  products$: BehaviorSubject<Product[]> = new BehaviorSubject<Product[]>([]);
   hasChanges$: Subject<any> = new Subject();
 
   constructor(private dbService: DatabaseService) {

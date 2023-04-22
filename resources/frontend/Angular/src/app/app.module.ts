@@ -6,8 +6,8 @@ import { AppComponent } from './app.component';
 import { LoginComponent } from './components/login/login.component';
 import { RegisterComponent } from './components/register/register.component';
 import { UserProfileComponent } from './components/user-profile/user-profile.component';
-import {HttpClientModule, HTTP_INTERCEPTORS} from "@angular/common/http";
-import {FormsModule, ReactiveFormsModule} from "@angular/forms";
+import { HttpClientModule, HTTP_INTERCEPTORS } from "@angular/common/http";
+import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { AuthInterceptor } from './shared/auth.interceptor';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { ProductComponent } from './components/product/product.component';
@@ -20,6 +20,7 @@ import { FilterComponent } from './components/filters/filter/filter.component';
 import { ShoppingListComponent } from './components/shopping-list/shopping-list.component';
 import { AccordionComponent } from './components/accordion/accordion.component';
 import { SearchComponent } from './components/search/search.component';
+import { InfoBoxComponent } from './components/info-box/info-box.component';
 
 @NgModule({
   declarations: [
@@ -37,7 +38,8 @@ import { SearchComponent } from './components/search/search.component';
     FilterComponent,
     ShoppingListComponent,
     AccordionComponent,
-    SearchComponent
+    SearchComponent,
+    InfoBoxComponent
   ],
   imports: [
     BrowserModule,

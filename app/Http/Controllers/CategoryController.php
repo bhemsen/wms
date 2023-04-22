@@ -4,7 +4,11 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Category;
+
+use App\Http\Controllers\UserCategoriesController;
 use Validator;
+
+
 
 class CategoryController extends Controller
 {
@@ -33,9 +37,11 @@ class CategoryController extends Controller
             return response()->json($validator->errors(), 422);
         } else {
             $q = Category::firstOrCreate($validator->validated());
+            $request['category_id'] = $q->id;
+            $c = UserCategoriesController::store($q->id);
             return response()->json([
                 "message"=>"Category created",
-                "category" => $q
+                "category" => $c
             ], 201);
         }
     }

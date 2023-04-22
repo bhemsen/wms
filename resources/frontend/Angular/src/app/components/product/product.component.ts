@@ -3,12 +3,13 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Subject } from 'rxjs';
 import { debounceTime, distinctUntilChanged, filter, switchMap, takeUntil } from 'rxjs/operators';
 import { ProductService } from 'src/app/product.service';
+import { CategoryService } from 'src/app/shared/category.service';
 import { DatabaseService, ProductCreationResponse } from 'src/app/shared/database.service';
 import { Product } from 'src/app/shared/interfaces/product';
 
 export interface Category {
   id: number,
-  name:string,
+  name: string,
 }
 
 @Component({
@@ -24,7 +25,7 @@ export class ProductComponent implements OnInit, OnDestroy {
   searchResults?: Product[];
   addProductsForm: FormGroup = new FormGroup({
     name: new FormControl('', Validators.required),
-    category_id: new FormControl(null, Validators.required),
+    category_id: new FormControl(null),
     count: new FormControl(1, Validators.required)
   });
 
@@ -32,10 +33,10 @@ export class ProductComponent implements OnInit, OnDestroy {
     productSearch: new FormControl('')
   })
 
-  constructor(private dbService: DatabaseService, private productService:ProductService) { }
+  constructor(private dbService: DatabaseService, private productService: ProductService, private categoryService: CategoryService) { }
 
   ngOnInit(): void {
-    if(window.location.href.includes('shoppinglist')) this.isShoppingList = true;
+    if (window.location.href.includes('shoppinglist')) this.isShoppingList = true;
 
     this.productSearchGrp.valueChanges.pipe(
       takeUntil(this.notifier$),
@@ -45,13 +46,13 @@ export class ProductComponent implements OnInit, OnDestroy {
       switchMap(searchTerm => {
         return this.dbService.searchProduct(searchTerm.productSearch)
       })
-      ).subscribe(e => {
-        console.log(e)
-        if(e.length) return this.searchResults = e;
-        this.searchResults = undefined;
-      })
+    ).subscribe(e => {
+      console.log(e)
+      if (e.length) return this.searchResults = e;
+      this.searchResults = undefined;
+    })
 
-    this.dbService.getAllCategories().pipe(takeUntil(
+    this.categoryService.getCategories$().pipe(takeUntil(
       this.notifier$
     )).subscribe(res => {
       this.categories = res
@@ -59,7 +60,7 @@ export class ProductComponent implements OnInit, OnDestroy {
   }
 
   submitForm(): void {
-    if(this.addProductsForm.invalid){
+    if (this.addProductsForm.invalid) {
       this.addProductsForm.markAllAsTouched();
       return
     }
@@ -67,17 +68,17 @@ export class ProductComponent implements OnInit, OnDestroy {
     this.dbService.addProduct(this.addProductsForm.get('name')?.value, this.addProductsForm.get('category_id')?.value).pipe(
       takeUntil(this.notifier$),
       switchMap((val: ProductCreationResponse) => {
-        if(window.location.href.includes('shoppinglist')) {
-        return this.dbService.setShoppinglistLevel(val.product.id.toString(), this.addProductsForm.get('count')?.value)
+        if (window.location.href.includes('shoppinglist')) {
+          return this.dbService.setShoppinglistLevel(val.product.id.toString(), this.addProductsForm.get('count')?.value)
 
         }
         return this.dbService.setStockLevel(val.product.id.toString(), this.addProductsForm.get('count')?.value)
       })
-      ).subscribe(res => {
-        console.log(res)
-        this.productService.setHasChanges(null);
-        this.hasChanges.emit(true);
-        this.addProductsForm.reset()
+    ).subscribe(res => {
+      console.log(res)
+      this.productService.setHasChanges(null);
+      this.hasChanges.emit(true);
+      this.addProductsForm.reset()
     })
   }
 
@@ -86,7 +87,7 @@ export class ProductComponent implements OnInit, OnDestroy {
     this.notifier$.complete()
   }
 
-  reset():void {
+  reset(): void {
     this.searchResults = undefined;
   }
 

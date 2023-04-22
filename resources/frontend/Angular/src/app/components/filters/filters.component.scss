@@ -2,8 +2,10 @@ form {
     max-width: 100%;
     margin: 0;
 }
+
 .add-container {
     margin-bottom: .5rem;
+
     input {
         padding-block: .9rem;
     }
@@ -13,23 +15,29 @@ form {
     margin-bottom: 1.8rem;
     max-height: 15.2rem;
     overflow-y: scroll;
+
     /* Hide scrollbar for Chrome, Safari and Opera */
     &::-webkit-scrollbar {
         display: none;
     }
+
     /* Hide scrollbar for IE, Edge and Firefox */
-    -ms-overflow-style: none;  /* IE and Edge */
-    scrollbar-width: none;  /* Firefox */
+    -ms-overflow-style: none;
+    /* IE and Edge */
+    scrollbar-width: none;
+    /* Firefox */
 }
 
 .plus {
     width: 15px;
+
     polygon {
         fill: #fff;
     }
 }
 
 .filter {
+    position: relative;
     text-align: center;
     color: var(--color-filter-inputs);
     font-size: var(--font-size-body);
@@ -50,8 +58,9 @@ form {
         padding-inline: 2.2rem;
         text-align: left;
         margin-bottom: 0;
+
         &:focus-visible {
-            outline:none;
+            outline: none;
             border: 1px solid var(--color-filter-inputs);
 
         }
@@ -65,7 +74,22 @@ form {
         opacity: 0;
         width: 0;
     }
+
+    .change-input {
+        opacity: 1;
+        width: 100%;
+        border: none;
+        background: transparent;
+        padding: 9px 24px;
+
+        &:focus,
+        &:focus-visible {
+            outline: none;
+            border: none;
+        }
+    }
 }
+
 .label {
     padding-block: .9rem;
     border-radius: 25px;
@@ -74,9 +98,13 @@ form {
     cursor: pointer;
 }
 
-.filter__input:checked + .label {
+.filter__input:checked+.label {
     background-color: var(--rose);
     color: #fff;
+
+    .fill-rose {
+        fill: white;
+    }
 }
 
 .add-category {
@@ -92,6 +120,12 @@ form {
 .col-6:nth-child(even) {
     padding-right: .5rem;
 }
+
 .col-6:nth-child(odd) {
     padding-left: .5rem;
+}
+
+.overlay-btn {
+    font-size: smaller;
+    padding: 0;
 }

@@ -2,11 +2,12 @@
     <form class="row" [formGroup]="filterForm">
         <div class="col-12 g-0">
             <div class="position-relative add-container">
-                <input type="text" placeholder="Kategorie hinzufügen" class="filter filter--input w-100" [formControl]="addCategory" (submit)="addNewCategory()">
+                <input type="text" placeholder="Kategorie hinzufügen" class="filter filter--input w-100"
+                    [formControl]="addCategory" (submit)="addNewCategory()">
                 <button class="add-category" type="submit" (click)="addNewCategory()">
                     <svg class="svg-icon fill-rose icon-add" focusable="false">
                         <use xlink:href="assets/icons/add-medium.svg#Ebene_1"></use>
-                      </svg>
+                    </svg>
                 </button>
             </div>
         </div>
@@ -17,10 +18,67 @@
             </div>
         </div>
 
-        <div class="col-6 g-0"  *ngFor="let filter of filters" >
+        <div class="col-6 g-0" *ngFor="let filter of filters; index as i">
             <div class="filter filter--radio">
-                <input class="filter__input" type="radio" id="{{filter.id}}" value="{{ filter.name }}" formControlName="filter">
-                <label class="label" for="{{filter.id}}">{{ filter.name }}</label>
+                <div class="{{this.changingFilterId == filter.id? 'd-none': ''}}">
+                    <input class="filter__input" type="radio" id="{{filter.id}}" value="{{ filter.id }}"
+                        formControlName="filter">
+                    <label class="label" for="{{filter.id}}">{{ filter.name }}</label>
+                </div>
+
+
+                <form id="input__wrapper__{{i}}" class="change-input__wrapper d-none position-relative"
+                    (ngSubmit)="changeCategoryName(i, filter)">
+                    <input id="input__{{i}}" class="change-input" type="text">
+                    <button class="btn overlay-btn" type="submit"></button>
+                </form>
+                <div *ngIf="changemode" class="overlay-btn__wrapper">
+                    <button class="btn overlay-btn me-1" (click)="changeInput('input__wrapper__'+i, filter.id)">
+                        <svg class="svg-icon  {{ filterForm.get('filter')?.value == filter.id ? 'fill-white' : 'fill-rose' }}"
+                            focusable="false">
+                            <use xlink:href="assets/icons/pen-solid.svg#Ebene_1"></use>
+                        </svg>
+                    </button>
+
+                    <!-- Button trigger modal -->
+                    <button class="btn overlay-btn" data-bs-toggle="modal" [attr.data-bs-target]="'#confirm__'+i">
+                        <svg class="svg-icon rotate-45 {{ filterForm.get('filter')?.value == filter.id ? 'fill-white' : 'fill-rose' }}"
+                            focusable="false">
+                            <use xlink:href="assets/icons/add-thin.svg#Ebene_1"></use>
+                        </svg>
+                    </button>
+                </div>
+
+
+                <!-- Modal -->
+                <div class="modal fade" id="confirm__{{i}}" data-bs-backdrop="static" data-bs-keyboard="false"
+                    tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h4 class="modal-title" id="staticBackdropLabel">Achtung</h4>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                    aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                Bist du dir sicher, dass du diese Kategorie löschen willst? Alle enthaltenden Produkte
+                                werden in die Standard-Kategorie verschoben
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary"
+                                    data-bs-dismiss="modal">Abbrechen</button>
+                                <button type="button" class="btn btn-primary">Löschen</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <div class="col-6 g-0">
+            <div class="filter filter--radio">
+                <input class="filter__input" type="radio" id="fallback" value="fallback" formControlName="filter">
+                <label class="label" for="fallback">Ohne Kategorie</label>
             </div>
         </div>
     </form>

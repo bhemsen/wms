@@ -5,8 +5,14 @@
     <app-accordion (hasChanges)="hasChanges$.next($event)"></app-accordion>
 
     <ul class="shopping-list">
-        <li #listItem class="shopping-list__item" *ngFor="let item of (this.displayList || this.shoppingList); let i = index;" id="shopping-list__item--{{ i }}" (mouseup)="clearTimer()">
-            <span class="position-relative shopping-list__item__text">{{ item.name }}</span>
+        <li #listItem class="shopping-list__item"
+            *ngFor="let item of (this.displayList || this.shoppingList); let i = index;"
+            id="shopping-list__item--{{ i }}" (mouseup)="clearTimer()">
+            <span class="position-relative shopping-list__item__text">{{ item.name }}
+                <span class="product-category">({{ item.category_name?
+                    item.category_name: 'Ohne Kategorie' }})
+                </span>
+            </span>
             <app-count [product]="item" [isShoppingList]="true" (hasChanges)="hasChanges$.next($event)"></app-count>
         </li>
     </ul>

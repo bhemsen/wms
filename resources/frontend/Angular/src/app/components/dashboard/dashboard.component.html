@@ -4,12 +4,22 @@
 
 <app-accordion></app-accordion>
 
-
-<section id="filters">
-  <app-filters (activeFilter)="filter($event)"></app-filters>
+<section id="change">
+  <div class="row">
+    <div class="col-12">
+      <div (click)="changeFilter()" class="change w-100 text-end {{this.changemode? 'fw-bold' : ''}}">
+        Bearbeiten {{this.changemode? 'beenden': ''}}
+      </div>
+    </div>
+  </div>
 </section>
 
-<section id="sort">
+<section id="filters">
+  <app-filters [changemode]="this.changemode" (activeFilter)="filter($event)"
+    (nameChanged)="changeFilter()"></app-filters>
+</section>
+
+<section id=" sort">
   <div class="row">
     <div class="col-12">
       <div (click)="sort()" class="sort w-100 text-end">
@@ -21,22 +31,73 @@
 
 <section id="products">
   <div class="accordion row">
-    <div *ngFor="let product of (this.displayList? this.displayList : this.products); index as i" class="accordion-item col-12 entry">
+    <div *ngFor="let product of (this.displayList? this.displayList : this.products); index as i"
+      class="accordion-item col-12 entry">
       <h3 class="accordion-header d-flex w-100 align-items-center" id="headingOne">
-        <button class="accordion-button name collapsed d-flex justify-content-between" type="button" data-bs-toggle="collapse" [attr.data-bs-target]="'#collapse-'+i" aria-expanded="false" [attr.aria-controls]="'collapse-'+i">
+        <button class="accordion-button name collapsed d-flex justify-content-between" type="button"
+          data-bs-toggle="collapse" [attr.data-bs-target]="'#collapse-'+i" aria-expanded="false"
+          [attr.aria-controls]="'collapse-'+i">
           <span>
             {{ product.name }}
             <span class="product-category">
-              {{ product.category_name }}
+              {{ product.category_name? product.category_name: 'Ohne Kategorie' }}
             </span>
           </span>
           <span class="amount">{{ product.count }}</span>
 
         </button>
       </h3>
-      <div [id]="'collapse-'+i" class="accordion-collapse collapse" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
-        <div class="accordion-body w-100">
+      <div [id]="'collapse-'+i" class="accordion-collapse collapse" aria-labelledby="headingOne"
+        data-bs-parent="#accordionExample">
+        <div class="accordion-body w-100 position-relative">
           <div class="accordion-body__wrapper">
+
+            <!-- Button trigger modal -->
+            <button class="btn overlay-btn me-1" data-bs-toggle="modal" [attr.data-bs-target]="'#change__'+i">
+              <svg class="svg-icon fill-grey" focusable="false">
+                <use xlink:href="assets/icons/pen-solid.svg#Ebene_1"></use>
+              </svg>
+            </button>
+
+
+            <!-- Modal -->
+            <div class="modal fade" id="change__{{i}}" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+              aria-labelledby="staticBackdropLabel" aria-hidden="true">
+              <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h4 class="modal-title" id="staticBackdropLabel">Kategorie ändern</h4>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                  </div>
+                  <form [formGroup]="changeProductCategoryGrp" (submit)="changePoductCategory(product)">
+                    <div class="modal-body">
+
+
+                      <app-info-box *ngIf="alertType && showInfoBox" [alert]="alertType">
+                        {{infoText}}
+                      </app-info-box>
+
+
+                      <select class="form-control" id="changeProductCategory" formControlName="changeProductCategory">
+                        <option selected hidden disabled value="null"></option>
+                        <option *ngFor="let category of this.categories" value="{{ category.id }}">{{ category.name }}
+                        </option>
+                      </select>
+                    </div>
+                    <div class="modal-footer">
+                      <button id="close" type="button" class="btn btn-secondary"
+                        data-bs-dismiss="modal">Schließen</button>
+                      <button type="submit" class="btn btn-primary">Verschieben</button>
+                    </div>
+                  </form>
+
+                </div>
+              </div>
+            </div>
+
+
+
+
             <app-count [product]="product"></app-count>
           </div>
         </div>

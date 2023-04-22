@@ -7,6 +7,7 @@ use App\Http\Controllers\ProductController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\StockController;
 use App\Http\Controllers\ShoppingListController;
+use App\Http\Controllers\UserCategoriesController;
 
 
 /*
@@ -47,3 +48,7 @@ Route::delete('shoppinglist/{product_id}/{amount}/{userId}', [ShoppingListContro
 
 
 Route::get('session', [ShoppingListController::class, 'index']);
+
+Route::resource('user/categories', UserCategoriesController::class);
+Route::delete('user/categories/{category_id}', [UserCategoriesController::class, 'destroy']);
+

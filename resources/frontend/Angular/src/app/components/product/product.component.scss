@@ -7,17 +7,6 @@
     margin-bottom: 2.5rem;
 }
 
-.form-control {
-    height: 35px;
-    border: 1px solid;
-    border-color: var(--light-grey);
-    font-size: var(--font-size-body);
-    color: var(--grey);
-    display: flex;
-    align-content: center;
-    flex-wrap: wrap;
-}
-
 .btn {
     padding: .7rem 5rem;
     font-size: var(--font-size-body);
@@ -32,6 +21,7 @@
     &-wrapper {
         position: relative;
     }
+
     &__results {
         position: absolute;
         background: white;
@@ -43,7 +33,7 @@
         border-right: 1px solid black;
         border-bottom: 1px solid black;
         border-radius: .4rem;
-        
+
         &__link {
             text-decoration: none;
             color: var(--light-grey);
@@ -60,15 +50,9 @@
     right: .75rem;
     top: 50%;
     transform: translateY(-50%);
-    .svg-icon {
-        fill: var(--light-grey);;
-    }
-}
-   
-.rotate-45 {
-    transform: rotate(45deg);
-}
 
-.product-category {
-    font-size: smaller;
+    .svg-icon {
+        fill: var(--light-grey);
+        ;
+    }
 }

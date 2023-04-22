@@ -12,24 +12,24 @@
 
 
     $light-green: #F7FAEF;
-    $dark-green:#90A35D;
-    $darker-green:#2D3E00;
-    $light-grey:#707070;
-    $grey:#505050;
-    $orange:#EFC17C;
-    $rose:#efb6cf;
+    $dark-green: #90A35D;
+    $darker-green: #2D3E00;
+    $light-grey: #707070;
+    $grey: #505050;
+    $orange: #EFC17C;
+    $rose: #efb6cf;
     $light-blue: #fafdff;
     $blue: #66A4C6;
     $dark-blue: #85b6d1;
-    $darker-blue:#142433;
+    $darker-blue: #142433;
 
     $shopping-list-border: #91a4b5;
-    
+
 
     // colors 
     --light-green: #{$light-green};
     --dark-green: #{$dark-green};
-    --darker-green:  #{$darker-green};
+    --darker-green: #{$darker-green};
 
     --light-grey: #{$light-grey};
     --grey: #{$grey};
@@ -43,13 +43,13 @@
     --darker-blue: #{$darker-blue};
 
     --color-bg: #{$light-blue};
-    --color-control-inputs: #{$dark-blue}; 
-    --color-filter-inputs: #{$rose}; 
+    --color-control-inputs: #{$dark-blue};
+    --color-filter-inputs: #{$rose};
     --color-icons: #{$blue};
 
     // --box-shadow: #73836E29;
     --box-shadow: #1424331A;
-    
+
     --shopping-list-border: #{$shopping-list-border};
 
 
@@ -58,6 +58,7 @@
     --font-size-body: 1.8rem;
     --font-size-h1: 3rem;
     --font-size-h3: 2.5rem;
+    --font-size-h4: 1.9rem;
     --font-size-sort: 1.2rem;
     --font-size-amount: 2.2rem;
     --font-size-capture: 1.2rem;
@@ -71,6 +72,8 @@
         --font-size-body: 2.1rem;
         --font-size-h1: 3.5rem;
         --font-size-h3: 2.8rem;
+        --font-size-h4: 2.2rem;
+
         --font-size-sort: 1.4rem;
         --font-size-amount: 2.5rem;
         --font-size-capture: 1.8rem;
@@ -94,6 +97,7 @@ body {
     font-size: var(--font-size-body);
     width: 100%;
 }
+
 app-root {
     height: 100%;
     display: flex;
@@ -107,24 +111,35 @@ app-footer {
 }
 
 .custom-btn {
-    border-radius:  0.375rem;
+    border-radius: 0.375rem;
     padding: 1px 6px;
 }
 
 /* Chrome, Safari, Edge, Opera */
 input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
-  -webkit-appearance: none;
-  margin: 0;
+    -webkit-appearance: none;
+    margin: 0;
 }
 
 /* Firefox */
 input[type=number] {
-  -moz-appearance: textfield;
+    -moz-appearance: textfield;
 }
 
 .form-group {
     margin-bottom: .8rem;
+}
+
+.form-control {
+    height: 35px;
+    border: 1px solid;
+    border-color: var(--light-grey);
+    font-size: var(--font-size-body);
+    color: var(--grey);
+    display: flex;
+    align-content: center;
+    flex-wrap: wrap;
 }
 
 .ng-touched {
@@ -147,6 +162,12 @@ h3 {
     color: var(--darker-green);
 }
 
+h4 {
+    font-size: var(--font-size-h4);
+    font-weight: 100;
+    color: var(--gray);
+}
+
 .svg-icon {
     fill: var(--color-icons);
     width: var(--font-size-body);
@@ -164,6 +185,10 @@ h3 {
     &.fill-rose {
         fill: var(--color-filter-inputs);
     }
+
+    &.fill-grey {
+        fill: var(--grey);
+    }
 }
 
 .icon {
@@ -172,6 +197,7 @@ h3 {
     display: inline-block;
     width: 20px;
     height: 20px;
+
     &.icon-add {
         &:after {
             content: '';
@@ -181,6 +207,58 @@ h3 {
             left: 0;
             right: 0;
             bottom: 0;
+        }
+    }
+}
+
+.rotate-45 {
+    transform: rotate(45deg);
+}
+
+.overlay-btn {
+    border: none;
+    box-shadow: none;
+    background: transparent;
+
+    &__wrapper {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        right: 2.2rem;
+        display: flex;
+    }
+}
+
+.product-category {
+    font-size: var(--font-size-capture);
+    font-weight: 300;
+    margin-top: .3rem;
+}
+
+.modal {
+    color: var(--grey);
+
+    &-header {
+        padding-inline: 2rem;
+    }
+
+    &-content {
+        border-radius: 2.5rem;
+    }
+
+    &-footer {
+        .btn-primary {
+            background-color: var(--dark-blue);
+            border-color: var(--dark-blue);
+        }
+
+        .btn-secondary {
+            background-color: var(--grey);
+            border-color: var(--grey);
+        }
+
+        button {
+            font-size: var(--font-size-body);
         }
     }
 }

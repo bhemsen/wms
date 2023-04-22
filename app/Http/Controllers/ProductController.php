@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
 use App\Models\Product;
+use App\Models\Category;
+use App\Models\Stock;
 
 use Validator;
 
@@ -39,7 +41,7 @@ class ProductController extends Controller
     {
         $validator = Validator::make($request -> all(),[
             "name" => "required|string|max:255",
-            "category_id" => "required|integer|min:1",
+            "category_id" => "integer|min:1|nullable",
         ]);
         if($validator -> fails()){
             return response()->json($validator->errors(), 422);
@@ -70,11 +72,19 @@ class ProductController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, $new_category_id)
     {
-        $product = Product::find($id);
-        $product->update($request->all());
-        return $product;
+        $user_id = auth()->user()->id;
+
+        $product = $request->product;
+
+        $newProduct = Product::firstOrCreate(['name' => $product['name'], 'category_id' =>$new_category_id]);
+
+        Stock::where('user_id', $user_id)
+            ->where('product_id', $product['id'])
+            ->update(['product_id'=>$newProduct->id]);
+
+        return response()->json($newProduct);
     }
 
     /**
@@ -86,10 +96,24 @@ class ProductController extends Controller
      */
     public function search($name)
     {
-        return response()->json(DB::table('products')->where('products.name', 'like', '%'.$name.'%')
-            ->leftJoin('categories as c','c.id', '=', 'products.category_id')
-            ->selectRaw('products.id as id, products.name as name, c.name as category_name, c.id as category_id')
-            ->get());
+        $user_id = auth()->user()->id;
+
+        $res = DB::select(DB::raw(
+            "
+            select p.id as id, p.name as name,  uc.category_id as category_id, c.name as category_name from products as p
+	            left join user_categories as uc 
+		            on p.category_id = uc.category_id
+	            left join categories as c 
+		            on c.id = uc.category_id
+	            where (p.category_id in (
+		            select uc.category_id 
+		            from user_categories as uc 
+			            where uc.user_id = ".$user_id.") 
+                        	or p.category_id is null) 
+                            and p.name like '%".$name."%'"
+                ));
+
+        return $res;
     }
 
     /**
