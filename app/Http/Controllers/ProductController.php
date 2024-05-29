@@ -21,14 +21,17 @@ class ProductController extends Controller
      */
     public function index()
     {
-        return response()->json(
-            DB::table('products')
-                ->leftJoin('categories as c','c.id', '=', 'products.category_id')
-                ->rightJoin('stocks as s','s.product_id', '=', 'products.id')
-                ->selectRaw('products.id as id, products.name as name, c.name as category_name, count(s.product_id) as count')
-                ->groupBy('products.id')
-                ->orderBy('products.name', 'asc')
-                ->get());
+    
+        DB::table('products')
+            ->leftJoin('categories as c','c.id', '=', 'products.category_id')
+            ->rightJoin('stocks as s','s.product_id', '=', 'products.id')
+            ->selectRaw('products.id as id, products.name as name, c.name as category_name, count(s.product_id) as count')
+            ->groupBy('products.id')
+            ->orderBy('products.name', 'asc')
+            ->get()
+            ->chunk(1, function ($items) {
+                return response()->json($items);
+            });
     }
 
     /**
